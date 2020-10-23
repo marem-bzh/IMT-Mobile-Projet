@@ -12,6 +12,7 @@ import {
     IonToolbar,
     useIonViewWillEnter
 } from '@ionic/react';
+import PageHeader from '../../components/PageHeader';
 
 const Sessions: React.FC = () => {
 
@@ -24,14 +25,7 @@ const Sessions: React.FC = () => {
 
     return (
         <IonPage id="speakers-page">
-            <IonHeader>
-                <IonToolbar>
-                    <IonTitle>Speakers</IonTitle>
-                    <IonButtons slot="end">
-                        <IonMenuButton autoHide={false} />
-                    </IonButtons>
-                </IonToolbar>
-            </IonHeader>
+            <PageHeader title="Speakers" />
             <IonContent fullscreen>
                 <IonList>
                     {speakers.map(s => <SpeakerListItem key={s.id} speaker={s} />)}
