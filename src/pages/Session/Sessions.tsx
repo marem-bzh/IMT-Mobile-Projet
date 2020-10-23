@@ -2,6 +2,7 @@ import SessionListItem from '../../components/SessionListItem';
 import React, { useState } from 'react';
 import { Session, getSessions } from '../../data/sessions';
 import {
+    IonBackButton,
     IonButtons,
     IonContent,
     IonHeader,
@@ -26,6 +27,9 @@ const Sessions: React.FC = () => {
         <IonPage id="sessions-page">
             <IonHeader>
                 <IonToolbar>
+                    <IonButtons>
+                        <IonBackButton defaultHref="/home"></IonBackButton>
+                    </IonButtons>
                     <IonTitle>Sessions</IonTitle>
                     <IonButtons slot="end">
                         <IonMenuButton autoHide={false} />

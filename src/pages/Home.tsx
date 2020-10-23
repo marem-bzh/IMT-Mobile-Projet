@@ -7,10 +7,12 @@ import {
   IonImg,
   IonMenuButton,
   IonPage,
+  IonRouterLink,
   IonTitle,
   IonToolbar,
 } from '@ionic/react';
 import './Home.css';
+import { Link } from 'react-router-dom';
 
 const Home: React.FC = () => {
 
@@ -37,8 +39,10 @@ const Home: React.FC = () => {
               18th oct - 19th oct
             </span></li>
           <li><span>
-            <IonButton expand="block" >See speakers</IonButton>
-            <IonButton expand="block" >See talks</IonButton>
+            <Link to={`/sessions`}>
+              <IonButton expand="block" >See speakers</IonButton>
+            </Link>
+            <IonButton routerLink={`/session`} expand="block" >See talks</IonButton>
           </span></li>
         </ul>
       </IonContent>
