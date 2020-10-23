@@ -1,18 +1,17 @@
-import SessionListItem from '../components/SessionListItem';
+import SessionListItem from '../../components/SessionListItem';
 import React, { useState } from 'react';
-import { Session, getSessions } from '../data/sessions';
+import { Session, getSessions } from '../../data/sessions';
 import {
+    IonButtons,
     IonContent,
     IonHeader,
     IonList,
+    IonMenuButton,
     IonPage,
-    IonRefresher,
-    IonRefresherContent,
     IonTitle,
     IonToolbar,
     useIonViewWillEnter
 } from '@ionic/react';
-import './Home.css';
 
 const Sessions: React.FC = () => {
 
@@ -23,32 +22,17 @@ const Sessions: React.FC = () => {
         setSessions(s);
     });
 
-    const refresh = (e: CustomEvent) => {
-        setTimeout(() => {
-            e.detail.complete();
-        }, 3000);
-    };
-
     return (
         <IonPage id="sessions-page">
             <IonHeader>
                 <IonToolbar>
                     <IonTitle>Sessions</IonTitle>
+                    <IonButtons slot="end">
+                        <IonMenuButton autoHide={false} />
+                    </IonButtons>
                 </IonToolbar>
             </IonHeader>
             <IonContent fullscreen>
-                <IonRefresher slot="fixed" onIonRefresh={refresh}>
-                    <IonRefresherContent></IonRefresherContent>
-                </IonRefresher>
-
-                <IonHeader collapse="condense">
-                    <IonToolbar>
-                        <IonTitle size="large">
-                            Inbox
-            </IonTitle>
-                    </IonToolbar>
-                </IonHeader>
-
                 <IonList>
                     {sessions.map(m => <SessionListItem key={m.id} session={m} />)}
                 </IonList>
