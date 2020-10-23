@@ -25,6 +25,7 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import Note from './pages/Session/Note';
 
 const App: React.FC = () => (
   <IonApp>
@@ -34,6 +35,7 @@ const App: React.FC = () => (
         <Route path="/message/:id" component={ViewMessage} exact={true} />
         <Route path="/sessions" component={Sessions} exact={true} />
         <Route path="/session/:id" component={SessionDetail} exact={true} />
+        <Route path="/notes/:id" component={Note} exact={true} />
         <Route exact path="/" render={() => <Redirect to="/home" />} />
         <Route render={() => <Redirect to="/home" />} />
       </IonRouterOutlet>
