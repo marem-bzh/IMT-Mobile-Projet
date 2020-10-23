@@ -1,0 +1,7 @@
+{
+  "name": "IMT-Mobile-Projet",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
