@@ -1,13 +1,17 @@
 {
-    "appId": "io.ionic.starter",
-    "appName": "IMT-Mobile-Projet",
-    "bundledWebRuntime": false,
-    "npmClient": "npm",
-    "webDir": "build",
-    "plugins": {
-        "SplashScreen": {
-            "launchShowDuration": 0
-        }
-    },
-    "cordova": {}
+  "appId": "io.ionic.starter",
+  "appName": "IMT-Mobile-Projet",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "build",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  },
+  "cordova": {},
+  "server": {
+    "url": "http://192.168.1.90:8101",
+    "cleartext": true
+  }
 }
