@@ -7,7 +7,6 @@ import {
   IonImg,
   IonMenuButton,
   IonPage,
-  IonRouterLink,
   IonTitle,
   IonToolbar,
 } from '@ionic/react';
@@ -39,12 +38,8 @@ const Home: React.FC = () => {
               18th oct - 19th oct
             </span></li>
           <li><span>
-            <Link to={`/`}>
-              <IonButton expand="block" >See speakers</IonButton>
-            </Link>
-            <Link to={`/sessions`}>
-              <IonButton routerLink={`/session`} expand="block" >See talks</IonButton>
-            </Link>
+            <IonButton expand="block" >See speakers</IonButton>
+            <IonButton routerLink={`/sessions`} expand="block" >See talks</IonButton>
           </span></li>
         </ul>
       </IonContent>
