@@ -1,0 +1,33 @@
+ion-img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    max-width: 400px;
+  }
+
+  ul
+  {
+      display: table;
+      table-layout: fixed;
+      width: 80%;
+      height: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0 0 0 0;
+  }
+  
+  li
+  {
+      text-align: center;
+      display: table-row;
+  }
+  span
+  {
+      display: table-cell;
+      vertical-align: middle;
+      /*border: 1px solid green;*/
+  }
+  ion-button{
+      margin: 20px;
+  }
