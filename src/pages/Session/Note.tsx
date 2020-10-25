@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {
     IonBackButton,
+    IonButton,
     IonButtons,
     IonContent,
     IonFab,
@@ -17,6 +18,7 @@ import {
 import { RouteComponentProps } from 'react-router';
 import { getNote, saveNote } from '../../data/notes';
 import { checkmark } from 'ionicons/icons';
+import { usePhotoGallery } from '../../hooks/UsePhotoGalery';
 import './Note.css';
 
 interface SessionDetailProps extends RouteComponentProps<{ id: string; }> { }
@@ -24,6 +26,8 @@ interface SessionDetailProps extends RouteComponentProps<{ id: string; }> { }
 const Note: React.FC<SessionDetailProps> = ({ match }) => {
 
     const [note, setNote] = useState<string>();
+
+    const { takePhoto } = usePhotoGallery();
 
     useIonViewWillEnter(() => {
         var n = getNote(parseInt(match.params.id, 10));
@@ -51,8 +55,9 @@ const Note: React.FC<SessionDetailProps> = ({ match }) => {
 
             <IonContent fullscreen>
                 <IonTextarea value={note} onIonChange={e => setNote(e.detail.value!)} autoGrow={true}>
-
                 </IonTextarea>
+
+                <IonButton onClick={() => takePhoto()}> Add a pictue</IonButton>
                 <IonFab vertical="bottom" horizontal="end" slot="fixed">
                     <IonFabButton onClick={() => saveNoteState()} routerLink={`/session/${match.params.id}`} routerDirection='back'>
                         <IonIcon icon={checkmark} />
