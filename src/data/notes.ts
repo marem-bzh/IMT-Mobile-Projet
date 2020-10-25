@@ -1,16 +1,21 @@
 
-var notes: { [id: number]: String; } = {
-    101: "This talk was amazing ! ",
-    102: "This talk was amazing ! ",
-    103: "This talk was amazing ! "
+var notes: { [id: number]: string; } = {
 };
 
 export const getNotes = () => notes;
 
 export const getNote = (id: number) => notes[id];
 
-function setNote(id: number, content: String) {
-    notes = Object.assign({}, notes, { id: content });
+export const saveNote = _saveNote;
 
-    // Store notes
+function _saveNote(id: number, content: string) {
+    const newNote = { [id]: content };
+    notes = Object.assign({}, notes, newNote);
+
+    console.log("Saving new note: " + newNote);
+    console.log("Note states:" + notes);
 }
+
+
+
+

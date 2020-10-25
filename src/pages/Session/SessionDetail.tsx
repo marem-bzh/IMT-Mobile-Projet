@@ -17,24 +17,27 @@ import {
 import { RouteComponentProps } from 'react-router';
 import { getSession, Session } from '../../data/sessions';
 import './SessionDetail.css';
+import { getNote } from '../../data/notes';
 
 interface SessionDetailProps extends RouteComponentProps<{ id: string; }> { }
 
 const SessionDetail: React.FC<SessionDetailProps> = ({ match }) => {
 
     const [session, setSession] = useState<Session>();
-    const [note] = useState<String>();
+    const [note, setNote] = useState<string>();
 
     useIonViewWillEnter(() => {
         const s = getSession(parseInt(match.params.id, 10));
         setSession(s);
+        const n = getNote(parseInt(match.params.id, 10));
+        setNote(n);
     });
 
     return (
         <IonPage id="view-message-page">
             <IonHeader translucent>
                 <IonToolbar>
-                    <IonButtons>
+                    <IonButtons slot="start">
                         <IonBackButton defaultHref="/session"></IonBackButton>
                     </IonButtons>
                     <IonTitle>Talk Detail</IonTitle>
@@ -46,8 +49,8 @@ const SessionDetail: React.FC<SessionDetailProps> = ({ match }) => {
 
             <IonContent fullscreen>
                 {session ?
-                    sessionDetails(session)
-                    : <div>Whoops, something went wrong !</div>
+                    sessionDetails(session, note)
+                    : <div>Whoops, something went wrong, we could not find this session!</div>
                 }
 
                 <IonItem>
@@ -67,7 +70,7 @@ const SessionDetail: React.FC<SessionDetailProps> = ({ match }) => {
 
 export default SessionDetail;
 
-function sessionDetails(session: Session): React.ReactNode {
+function sessionDetails(session: Session, note?: string): React.ReactNode {
     return <>
         <div className="ion-padding">
             <h2>{session.title}</h2>
@@ -85,9 +88,9 @@ function sessionDetails(session: Session): React.ReactNode {
                 : <p>No speaker for this session</p>}
         </div>
         <IonFab vertical="bottom" horizontal="start" slot="fixed">
-            <IonButton expand="block" routerLink={`/session/${session.id}`}>
-                Add a note for this session.
-                    </IonButton>
+            <IonButton expand="block" routerLink={`/notes/${session.id}`}>
+                {note ? "Edit note for this session" : "Add a note for this session."}
+            </IonButton>
         </IonFab>
 
     </>;
