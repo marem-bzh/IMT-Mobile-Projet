@@ -10,6 +10,7 @@ import Speakers from './pages/Speaker/Speakers';
 import SpeakerDetails from './pages/Speaker/SpeakerDetails';
 import Note from './pages/Session/Note';
 import { fetchSpeakers } from './data/speakers';
+import { fetchSessions } from './data/sessions';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -32,6 +33,7 @@ import './theme/variables.css';
 
 if (navigator.onLine) {
   fetchSpeakers();
+  fetchSessions();
 }
 
 const App: React.FC = () => (
