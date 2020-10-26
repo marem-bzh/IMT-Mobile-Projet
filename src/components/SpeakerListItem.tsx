@@ -1,9 +1,6 @@
-import React from 'react';
-import {
-  IonItem,
-  IonLabel
-} from '@ionic/react';
-import { Speaker } from '../data/speakers';
+import React from "react";
+import { IonItem, IonLabel } from "@ionic/react";
+import { Speaker } from "../data/speakers";
 
 interface SpeakerListItemProps {
   speaker: Speaker;
@@ -20,4 +17,3 @@ const SpeakerListItem: React.FC<SpeakerListItemProps> = ({ speaker }) => {
 };
 
 export default SpeakerListItem;
-

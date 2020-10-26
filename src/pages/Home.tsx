@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   IonButton,
   IonButtons,
@@ -9,12 +9,10 @@ import {
   IonPage,
   IonTitle,
   IonToolbar,
-} from '@ionic/react';
-import './Home.css';
-import { Link } from 'react-router-dom';
+} from "@ionic/react";
+import "./Home.css";
 
 const Home: React.FC = () => {
-
   return (
     <IonPage id="home-page">
       <IonHeader>
@@ -26,21 +24,28 @@ const Home: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-
-
-
         <ul>
-          <li><span>
-            <IonImg src="https://upload.wikimedia.org/wikipedia/commons/6/67/IMT_Atlantique_logo.png" />
-          </span></li>
-          <li><span>
-            <h2>DevFest 2018</h2>
+          <li>
+            <span>
+              <IonImg src="https://upload.wikimedia.org/wikipedia/commons/6/67/IMT_Atlantique_logo.png" />
+            </span>
+          </li>
+          <li>
+            <span>
+              <h2>DevFest 2018</h2>
               18th oct - 19th oct
-            </span></li>
-          <li><span>
-            <IonButton routerLink={`/speakers`} expand="block" >See speakers</IonButton>
-            <IonButton routerLink={`/sessions`} expand="block" >See talks</IonButton>
-          </span></li>
+            </span>
+          </li>
+          <li>
+            <span>
+              <IonButton routerLink={`/speakers`} expand="block">
+                See speakers
+              </IonButton>
+              <IonButton routerLink={`/sessions`} expand="block">
+                See talks
+              </IonButton>
+            </span>
+          </li>
         </ul>
       </IonContent>
     </IonPage>

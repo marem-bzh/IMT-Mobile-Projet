@@ -1,24 +1,18 @@
-import SpeakerListItem from '../../components/SpeakerListItem';
-import React, { useEffect, useState } from 'react';
-import { Speaker, getSpeakers } from '../../data/speakers';
+import SpeakerListItem from "../../components/SpeakerListItem";
+import React, { useState } from "react";
+import { Speaker, getSpeakers } from "../../data/speakers";
 import {
-    IonButtons,
-    IonContent,
-    IonHeader,
-    IonList,
-    IonMenuButton,
-    IonPage,
-    IonTitle,
-    IonToolbar,
-    useIonViewWillEnter
-} from '@ionic/react';
-import PageHeader from '../../components/PageHeader';
+  IonContent,
+  IonList,
+  IonPage,
+  useIonViewWillEnter,
+} from "@ionic/react";
+import PageHeader from "../../components/PageHeader";
 
 const Sessions: React.FC = () => {
+  const [speakers, setSpeakers] = useState<Speaker[]>([]);
 
-    const [speakers, setSpeakers] = useState<Speaker[]>([]);
-
-    /*useEffect(() => {
+  /*useEffect(() => {
         fetch(url)
             .then(response => response.json())
             .then(response => {
@@ -31,22 +25,23 @@ const Sessions: React.FC = () => {
             .catch(error => console.log(error));
     });*/
 
-    useIonViewWillEnter(async () => {
-        const p = await getSpeakers();
-        setSpeakers(p);
-    });
+  useIonViewWillEnter(async () => {
+    const p = await getSpeakers();
+    setSpeakers(p);
+  });
 
-    return (
-        <IonPage id="speakers-page">
-            <PageHeader title="Speakers" />
-            <IonContent fullscreen>
-                <IonList>
-                    {speakers.map(s => <SpeakerListItem key={s.id} speaker={s} />)}
-                </IonList>
-            </IonContent>
-        </IonPage>
-    );
+  return (
+    <IonPage id="speakers-page">
+      <PageHeader title="Speakers" />
+      <IonContent fullscreen>
+        <IonList>
+          {speakers.map((s) => (
+            <SpeakerListItem key={s.id} speaker={s} />
+          ))}
+        </IonList>
+      </IonContent>
+    </IonPage>
+  );
 };
 
 export default Sessions;
-

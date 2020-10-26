@@ -1,9 +1,6 @@
-import React from 'react';
-import {
-  IonItem,
-  IonLabel
-} from '@ionic/react';
-import { Session } from '../data/sessions';
+import React from "react";
+import { IonItem, IonLabel } from "@ionic/react";
+import { Session } from "../data/sessions";
 
 interface SessionListItemProps {
   session: Session;
