@@ -27,7 +27,7 @@ const Sessions: React.FC = () => {
         <IonPage id="sessions-page">
             <IonHeader>
                 <IonToolbar>
-                    <IonButtons>
+                    <IonButtons slot="start">
                         <IonBackButton defaultHref="/home"></IonBackButton>
                     </IonButtons>
                     <IonTitle>Sessions</IonTitle>

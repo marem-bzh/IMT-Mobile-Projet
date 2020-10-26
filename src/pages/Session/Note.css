@@ -1,0 +1,14 @@
+ion-textarea {
+    margin-left: auto!important;
+    margin-right: auto!important;
+    min-height: 20%!important;
+    width: 95%!important;
+    border: 1px solid;
+    border-radius: 25px;
+    padding: 10px;
+}
+
+ion-img {
+    width: 30%;
+    height: 300px;
+}
