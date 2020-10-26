@@ -3,7 +3,6 @@ import { Redirect, Route } from "react-router-dom";
 import { IonApp, IonRouterOutlet } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import Home from "./pages/Home";
-import ViewMessage from "./pages/ViewMessage";
 import Sessions from "./pages/Session/Sessions";
 import SessionDetail from "./pages/Session/SessionDetail";
 import Speakers from "./pages/Speaker/Speakers";
@@ -41,7 +40,6 @@ const App: React.FC = () => (
     <IonReactRouter>
       <IonRouterOutlet>
         <Route path="/home" component={Home} exact={true} />
-        <Route path="/message/:id" component={ViewMessage} exact={true} />
         <Route path="/sessions" component={Sessions} exact={true} />
         <Route path="/session/:id" component={SessionDetail} exact={true} />
         <Route path="/notes/:id" component={Note} exact={true} />
