@@ -3,10 +3,8 @@ import {
   IonContent,
   IonImg,
   IonItem,
-  IonLabel,
   IonList,
   IonPage,
-  IonThumbnail,
   useIonViewWillEnter,
 } from "@ionic/react";
 
@@ -18,7 +16,7 @@ import SessionListItem from "../../components/SessionListItem";
 
 import "./Speaker.css";
 
-interface SpeakerDetailProps extends RouteComponentProps<{ id: string }> { }
+interface SpeakerDetailProps extends RouteComponentProps<{ id: string }> {}
 
 const SpeakerDetail: React.FC<SpeakerDetailProps> = ({ match }) => {
   const [speaker, setSpeaker] = useState<Speaker>();
@@ -26,14 +24,18 @@ const SpeakerDetail: React.FC<SpeakerDetailProps> = ({ match }) => {
 
   useIonViewWillEnter(() => {
     getSpeaker(parseInt(match.params.id, 10))
-      .then(s => setSpeaker(s))
+      .then((s) => setSpeaker(s))
       .catch();
   });
 
   useEffect(() => {
     getSessions()
       .then((allSessions) =>
-        setSessions(allSessions.filter(s => s.speakers?.includes(parseInt("" + speaker?.id))))
+        setSessions(
+          allSessions.filter((s) =>
+            s.speakers?.includes(parseInt("" + speaker?.id))
+          )
+        )
       )
       .catch();
   }, [speaker]); // this effect callback will be called only when the speaker state is updated
@@ -43,34 +45,36 @@ const SpeakerDetail: React.FC<SpeakerDetailProps> = ({ match }) => {
       <PageHeader title="Speaker" />
 
       <IonContent>
-        {
-          speaker ? (
-            <>
-              <div className="ion-padding">
-                <h2>{speaker.name}</h2>
+        {speaker ? (
+          <>
+            <div className="ion-padding">
+              <h2>{speaker.name}</h2>
 
-                <IonImg className="speaker-photo" src={speaker.photoUrl} />
+              <IonImg className="speaker-photo" src={speaker.photoUrl} />
 
-                <p>
-                  {speaker.bio ? speaker.bio : "This speaker has no biography."}
-                </p>
-              </div>
+              <p>
+                {speaker.bio ? speaker.bio : "This speaker has no biography."}
+              </p>
+            </div>
 
-              <IonItem>
-                <h2>Talks</h2>
-              </IonItem>
-              <div className="ion-padding">
-                {sessions && sessions.length > 0 ? (
-                  <IonList>{sessions.map((s) => <SessionListItem session={s} />)}</IonList>
-                ) : (
-                    <p>No sessions for this speaker</p>
-                  )}
-              </div>
-            </>
-          ) : (
-              <div className="ion-padding">Whoops, something went wrong !</div>
-            )
-        }
+            <IonItem>
+              <h2>Talks</h2>
+            </IonItem>
+            <div className="ion-padding">
+              {sessions && sessions.length > 0 ? (
+                <IonList>
+                  {sessions.map((s) => (
+                    <SessionListItem session={s} key={s.id} />
+                  ))}
+                </IonList>
+              ) : (
+                <p>No speaker for this session.</p>
+              )}
+            </div>
+          </>
+        ) : (
+          <div className="ion-padding">Whoops, something went wrong !</div>
+        )}
       </IonContent>
     </IonPage>
   );

@@ -2,17 +2,12 @@ import SessionListItem from "../../components/SessionListItem";
 import React, { useState } from "react";
 import { Session, getSessions } from "../../data/sessions";
 import {
-  IonBackButton,
-  IonButtons,
   IonContent,
-  IonHeader,
   IonList,
-  IonMenuButton,
   IonPage,
-  IonTitle,
-  IonToolbar,
   useIonViewWillEnter,
 } from "@ionic/react";
+import PageHeader from "../../components/PageHeader";
 
 const Sessions: React.FC = () => {
   const [sessions, setSessions] = useState<Session[]>([]);
@@ -24,17 +19,7 @@ const Sessions: React.FC = () => {
 
   return (
     <IonPage id="sessions-page">
-      <IonHeader>
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonBackButton defaultHref="/home"></IonBackButton>
-          </IonButtons>
-          <IonTitle>Sessions</IonTitle>
-          <IonButtons slot="end">
-            <IonMenuButton autoHide={false} />
-          </IonButtons>
-        </IonToolbar>
-      </IonHeader>
+      <PageHeader title="Talks" />
       <IonContent fullscreen>
         <IonList>
           {sessions.map((m) => (

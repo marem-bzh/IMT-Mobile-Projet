@@ -1,20 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
-  IonBackButton,
   IonButton,
-  IonButtons,
   IonContent,
   IonFab,
   IonGrid,
-  IonHeader,
   IonImg,
   IonItem,
   IonList,
-  IonMenuButton,
   IonPage,
   IonRow,
-  IonTitle,
-  IonToolbar,
   useIonViewWillEnter,
 } from "@ionic/react";
 import { RouteComponentProps } from "react-router";
@@ -22,11 +16,15 @@ import { getSession, Session } from "../../data/sessions";
 import "./SessionDetail.css";
 import { getNote } from "../../data/notes";
 import { usePhotoGallery } from "../../hooks/UsePhotoGalery";
+import { getSpeakers, Speaker } from "../../data/speakers";
+import SpeakerListItem from "../../components/SpeakerListItem";
+import PageHeader from "../../components/PageHeader";
 
 interface SessionDetailProps extends RouteComponentProps<{ id: string }> {}
 
 const SessionDetail: React.FC<SessionDetailProps> = ({ match }) => {
   const [session, setSession] = useState<Session>();
+  const [speakers, setSpeakers] = useState<Speaker[]>();
   const [note, setNote] = useState<string>();
   const { photos } = usePhotoGallery();
 
@@ -37,23 +35,23 @@ const SessionDetail: React.FC<SessionDetailProps> = ({ match }) => {
     setNote(n);
   });
 
+  useEffect(() => {
+    getSpeakers()
+      .then((allSpeaker) => {
+        return setSpeakers(
+          allSpeaker.filter((s) => session?.speakers?.includes(s.id))
+        );
+      })
+      .catch();
+  }, [session]);
+
   return (
     <IonPage id="view-message-page">
-      <IonHeader translucent>
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonBackButton defaultHref="/session"></IonBackButton>
-          </IonButtons>
-          <IonTitle>Talk Detail</IonTitle>
-          <IonButtons slot="end">
-            <IonMenuButton autoHide={false} />
-          </IonButtons>
-        </IonToolbar>
-      </IonHeader>
+      <PageHeader title="Talk detail" />
 
       <IonContent fullscreen>
         {session ? (
-          sessionDetails(session, note)
+          sessionDetails(session, speakers)
         ) : (
           <div>
             Whoops, something went wrong, we could not find this session!
@@ -91,7 +89,10 @@ const SessionDetail: React.FC<SessionDetailProps> = ({ match }) => {
 
 export default SessionDetail;
 
-function sessionDetails(session: Session, note?: string): React.ReactNode {
+function sessionDetails(
+  session: Session,
+  speakers?: Speaker[]
+): React.ReactNode {
   return (
     <>
       <div className="ion-padding">
@@ -107,8 +108,12 @@ function sessionDetails(session: Session, note?: string): React.ReactNode {
         <h2>Speakers</h2>
       </IonItem>
       <div className="ion-padding">
-        {session.speakers ? (
-          <IonList>{session.speakers.map((s) => s)}</IonList>
+        {speakers && speakers.length > 0 ? (
+          <IonList>
+            {speakers.map((s) => (
+              <SpeakerListItem speaker={s} key={s.id} />
+            ))}
+          </IonList>
         ) : (
           <p>No speaker for this session</p>
         )}
