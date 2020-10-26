@@ -1,42 +1,50 @@
+import { Plugins } from '@capacitor/core';
+const { Storage } = Plugins;
+
+
 export interface Speaker {
     id: number;
-    title: string;
-    titleMobile: string;
-    image: string;
-    speakers?: number[];
-    description?: string;
-    type?: string;
+    name: string;
+    photoUrl: string;
+    bio: string;
+    sessionsIds: number[];
 }
 
-const speakers: Speaker[] = [
-    {
-        "id": 101,
-        "title": "Gates open / Ouverture des portes",
-        "titleMobile": "Gates open",
-        "image": "https://devfest2018.gdgnantes.com/images/backgrounds/opening.jpg",
-        "type": "break"
-    },
-    {
-        "id": 102,
-        "title": "Opening keynote / Keynote d'ouverture",
-        "titleMobile": "Opening keynote",
-        "image": "https://devfest2018.gdgnantes.com/images/backgrounds/keynote.jpg",
-        "description": "",
-        "type": "📣 Keynote",
-        "speakers": [
-            181
-        ]
-    },
-    {
-        "id": 103,
-        "title": "Lunch / Déjeuner",
-        "titleMobile": "Lunch",
-        "description": "Foooooood !!!",
-        "image": "https://devfest2018.gdgnantes.com/images/backgrounds/lunch.jpg",
-        "type": "break"
-    },
-];
+const speakersUrl = 'https://devfest-nantes-2018-api.cleverapps.io/speakers';
 
-export const getSpeakers = () => speakers;
+export function fetchSpeakers() {
+    fetch(speakersUrl)
+        .then(response => response.json())
+        .then(response => {
+            response = Object.keys(response).map((key) => response[parseInt(key)]); // The API returns an object instead of an array so we're fixing that here
 
-export const getSpeaker = (id: number) => speakers.find(s => s.id === id);
+            const speakers: Speaker[] = response.map((s: any) => {
+                return {
+                    id: s.id,
+                    name: s.name,
+                    photoUrl: s.photoUrl,
+                    bio: s.shortBio,
+                    sessionsIds: []
+                };
+            });
+
+            return Storage.set({
+                key: 'speakers',
+                value: JSON.stringify(speakers),
+            });
+        })
+        .catch(error => console.log(error));
+}
+
+export async function getSpeakers() {
+    const data = await Storage.get({ key: 'speakers' });
+    if (data.value == null) return [];
+
+    let speakers = JSON.parse(data.value);
+    return speakers;
+};
+
+export async function getSpeaker(id: number) {
+    return (await getSpeakers()).find((s: Speaker) => s.id === id);
+};
+

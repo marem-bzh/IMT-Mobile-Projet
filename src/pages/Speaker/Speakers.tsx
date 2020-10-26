@@ -1,5 +1,5 @@
 import SpeakerListItem from '../../components/SpeakerListItem';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Speaker, getSpeakers } from '../../data/speakers';
 import {
     IonButtons,
@@ -18,8 +18,21 @@ const Sessions: React.FC = () => {
 
     const [speakers, setSpeakers] = useState<Speaker[]>([]);
 
-    useIonViewWillEnter(() => {
-        const p = getSpeakers();
+    /*useEffect(() => {
+        fetch(url)
+            .then(response => response.json())
+            .then(response => {
+                setSpeakers(response.map(speaker => {
+                    return {
+
+                    };
+                }))
+            })
+            .catch(error => console.log(error));
+    });*/
+
+    useIonViewWillEnter(async () => {
+        const p = await getSpeakers();
         setSpeakers(p);
     });
 
@@ -36,3 +49,4 @@ const Sessions: React.FC = () => {
 };
 
 export default Sessions;
+

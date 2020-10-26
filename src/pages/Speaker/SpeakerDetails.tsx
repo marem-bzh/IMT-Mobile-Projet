@@ -14,59 +14,52 @@ import {
 } from '@ionic/react';
 
 import { RouteComponentProps } from 'react-router';
+import { getSpeaker, Speaker } from '../../data/speakers';
 import { getSession, Session } from '../../data/sessions';
+import PageHeader from '../../components/PageHeader';
 
-interface SessionDetailProps extends RouteComponentProps<{ id: string; }> { }
+interface SpeakerDetailProps extends RouteComponentProps<{ id: string; }> { }
 
-const SessionDetail: React.FC<SessionDetailProps> = ({ match }) => {
+const SpeakerDetail: React.FC<SpeakerDetailProps> = ({ match }) => {
 
-    const [session, setSession] = useState<Session>();
+    const [speaker, setSpeaker] = useState<Speaker>();
+    const [sessions, setSessions] = useState<Session[]>();
 
-    useIonViewWillEnter(() => {
-        const s = getSession(parseInt(match.params.id, 10));
-        setSession(s);
+    useIonViewWillEnter(async () => {
+        const s = await getSpeaker(parseInt(match.params.id, 10));
+        setSpeaker(s);
     });
 
     return (
-        <IonPage id="view-message-page">
-            <IonHeader translucent>
-                <IonToolbar>
-                    <IonButtons>
-                        <IonBackButton defaultHref="/session"></IonBackButton>
-                    </IonButtons>
-                    <IonTitle>Talk Detail</IonTitle>
-                    <IonButtons slot="end">
-                        <IonMenuButton autoHide={false} />
-                    </IonButtons>
-                </IonToolbar>
-            </IonHeader>
+        <IonPage id="view-speaker-page">
+            <PageHeader title="Speaker details" />
 
             <IonContent fullscreen>
-                {session ? (
+                {speaker ? (
                     <>
                         <div className="ion-padding">
-                            <h2>{session.title}</h2>
-                            <p>{session.description ? session.description : "This session has no description."}</p>
+                            <h2>{speaker.name}</h2>
+                            <p>{speaker.bio ? speaker.bio : "This speaker has no biography."}</p>
                         </div>
 
                         <IonItem>
-                            <h2>Speakers</h2>
+                            <h2>Sessions</h2>
                         </IonItem>
                         <div className="ion-padding">
                             {
-                                session.speakers ?
+                                sessions && sessions.length > 0 ?
                                     <IonList>
-                                        {session.speakers.map(s => s)}
+                                        {sessions.map(s => s)}
                                     </IonList>
-                                    : <p>No speaker for this session</p>
+                                    : <p>No sessions for this speaker</p>
                             }
                         </div>
 
                     </>
-                ) : <div>Whoops, something went wrong !</div>}
+                ) : <div className="ion-padding">Whoops, something went wrong !</div>}
             </IonContent>
         </IonPage>
     );
 };
 
-export default SessionDetail;
+export default SpeakerDetail;

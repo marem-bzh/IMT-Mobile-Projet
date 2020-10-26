@@ -8,6 +8,8 @@ import Sessions from './pages/Session/Sessions';
 import SessionDetail from './pages/Session/SessionDetail';
 import Speakers from './pages/Speaker/Speakers';
 import SpeakerDetails from './pages/Speaker/SpeakerDetails';
+import Note from './pages/Session/Note';
+import { fetchSpeakers } from './data/speakers';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -27,7 +29,10 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import Note from './pages/Session/Note';
+
+if (navigator.onLine) {
+  fetchSpeakers();
+}
 
 const App: React.FC = () => (
   <IonApp>
@@ -39,7 +44,7 @@ const App: React.FC = () => (
         <Route path="/session/:id" component={SessionDetail} exact={true} />
         <Route path="/notes/:id" component={Note} exact={true} />
         <Route path="/speakers" component={Speakers} exact={true} />
-        <Route path="/speakers/:id" component={SpeakerDetails} exact={true} />
+        <Route path="/speaker/:id" component={SpeakerDetails} exact={true} />
         <Route exact path="/" render={() => <Redirect to="/home" />} />
         <Route render={() => <Redirect to="/home" />} />
       </IonRouterOutlet>
