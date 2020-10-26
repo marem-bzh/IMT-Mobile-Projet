@@ -27,6 +27,11 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import { fetchSpeakers } from './data/speakers';
+
+if (navigator.onLine) {
+  fetchSpeakers();
+}
 
 const App: React.FC = () => (
   <IonApp>

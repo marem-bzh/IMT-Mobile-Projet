@@ -25,19 +25,9 @@ const SpeakerDetail: React.FC<SpeakerDetailProps> = ({ match }) => {
     const [speaker, setSpeaker] = useState<Speaker>();
     const [sessions, setSessions] = useState<Session[]>();
 
-    useIonViewWillEnter(() => {
-        const s = getSpeaker(parseInt(match.params.id, 10));
+    useIonViewWillEnter(async () => {
+        const s = await getSpeaker(parseInt(match.params.id, 10));
         setSpeaker(s);
-
-        const sessions: Session[] = [];
-        speaker?.sessionsIds?.forEach((id, index) => {
-            const session = getSession(id);
-            if (session != null) {
-                sessions.push(session);
-            }
-        });
-
-        setSessions(sessions);
     });
 
     return (
@@ -66,7 +56,7 @@ const SpeakerDetail: React.FC<SpeakerDetailProps> = ({ match }) => {
                         </div>
 
                     </>
-                ) : <div>Whoops, something went wrong !</div>}
+                ) : <div className="ion-padding">Whoops, something went wrong !</div>}
             </IonContent>
         </IonPage>
     );
