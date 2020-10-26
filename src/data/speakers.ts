@@ -18,7 +18,7 @@ export function fetchSpeakers() {
         .then(response => {
             response = Object.keys(response).map((key) => response[parseInt(key)]); // The API returns an object instead of an array so we're fixing that here
 
-            const speakers = response.map((s: any) => {
+            const speakers: Speaker[] = response.map((s: any) => {
                 return {
                     id: s.id,
                     name: s.name,
