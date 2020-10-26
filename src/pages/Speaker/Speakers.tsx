@@ -36,7 +36,7 @@ const Sessions: React.FC = () => {
       <IonContent fullscreen>
         <IonList>
           {speakers.map((s) => (
-            <SpeakerListItem key={s.id} speaker={s} />
+            <SpeakerListItem speaker={s} />
           ))}
         </IonList>
       </IonContent>

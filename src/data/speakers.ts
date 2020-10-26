@@ -8,7 +8,6 @@ export interface Speaker {
     name: string;
     photoUrl: string;
     bio: string;
-    sessionsIds: number[];
 }
 
 export function fetchSpeakers() {
@@ -23,7 +22,6 @@ export function fetchSpeakers() {
                     name: s.name,
                     photoUrl: s.photoUrl,
                     bio: s.shortBio,
-                    sessionsIds: [],
                 };
             });
 
@@ -43,6 +41,8 @@ export async function getSpeakers() {
     return speakers;
 }
 
-export async function getSpeaker(id: number) {
-    return (await getSpeakers()).find((s: Speaker) => s.id === id);
+export async function getSpeaker(id: number): Promise<Speaker> {
+    const ret = (await getSpeakers()).find((s: Speaker) => s.id == id);
+    return ret;
 }
+
