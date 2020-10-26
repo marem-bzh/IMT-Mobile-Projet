@@ -16,7 +16,7 @@ const PageHeader = ({ title }: PageHeaderProps) => {
     return (
         <IonHeader>
             <IonToolbar>
-                <IonButtons>
+                <IonButtons slot="start">
                     <IonBackButton defaultHref="/home"></IonBackButton>
                 </IonButtons>
                 <IonTitle>{title}</IonTitle>
