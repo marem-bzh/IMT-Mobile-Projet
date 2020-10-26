@@ -1,6 +1,7 @@
 import { Plugins } from "@capacitor/core";
 const { Storage } = Plugins;
-const speakersUrl = "https://devfest-nantes-2018-api.cleverapps.io/speakers";
+const SPEAKERS_URL = "https://devfest-nantes-2018-api.cleverapps.io/speakers";
+const SPEAKERS_PHOTOS_BASE_URL = "https://devfest2018.gdgnantes.com/";
 const SPEAKERS_STORAGE_KEY = "speakers";
 
 export interface Speaker {
@@ -11,7 +12,7 @@ export interface Speaker {
 }
 
 export function fetchSpeakers() {
-    fetch(speakersUrl)
+    fetch(SPEAKERS_URL)
         .then((response) => response.json())
         .then((response) => {
             response = Object.keys(response).map((key) => response[parseInt(key)]); // The API returns an object instead of an array so we're fixing that here
@@ -20,7 +21,7 @@ export function fetchSpeakers() {
                 return {
                     id: s.id,
                     name: s.name,
-                    photoUrl: s.photoUrl,
+                    photoUrl: SPEAKERS_PHOTOS_BASE_URL + s.photoUrl,
                     bio: s.shortBio,
                 };
             });
