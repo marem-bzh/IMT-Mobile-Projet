@@ -38,7 +38,7 @@ const Home: React.FC = () => {
               18th oct - 19th oct
             </span></li>
           <li><span>
-            <IonButton expand="block" >See speakers</IonButton>
+            <IonButton routerLink={`/speakers`} expand="block" >See speakers</IonButton>
             <IonButton routerLink={`/sessions`} expand="block" >See talks</IonButton>
           </span></li>
         </ul>
