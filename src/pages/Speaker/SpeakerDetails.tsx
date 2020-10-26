@@ -12,7 +12,7 @@ import { getSpeaker, Speaker } from "../../data/speakers";
 import { Session } from "../../data/sessions";
 import PageHeader from "../../components/PageHeader";
 
-interface SpeakerDetailProps extends RouteComponentProps<{ id: string }> {}
+interface SpeakerDetailProps extends RouteComponentProps<{ id: string }> { }
 
 const SpeakerDetail: React.FC<SpeakerDetailProps> = ({ match }) => {
   const [speaker, setSpeaker] = useState<Speaker>();
@@ -44,13 +44,13 @@ const SpeakerDetail: React.FC<SpeakerDetailProps> = ({ match }) => {
               {sessions && sessions.length > 0 ? (
                 <IonList>{sessions.map((s) => s)}</IonList>
               ) : (
-                <p>No sessions for this speaker</p>
-              )}
+                  <p>No sessions for this speaker</p>
+                )}
             </div>
           </>
         ) : (
-          <div className="ion-padding">Whoops, something went wrong !</div>
-        )}
+            <div className="ion-padding">Whoops, something went wrong !</div>
+          )}
       </IonContent>
     </IonPage>
   );
