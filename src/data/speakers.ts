@@ -1,39 +1,40 @@
 export interface Speaker {
     id: number;
-    title: string;
-    titleMobile: string;
-    image: string;
-    speakers?: number[];
-    description?: string;
-    type?: string;
+    name: string;
+    photoUrl: string;
+    bio: string;
+    sessionsIds?: number[];
 }
+/*
+
+nom + prénom
+photo
+biographie
+présentations
+
+*/
 
 const speakers: Speaker[] = [
     {
         "id": 101,
-        "title": "Gates open / Ouverture des portes",
-        "titleMobile": "Gates open",
-        "image": "https://devfest2018.gdgnantes.com/images/backgrounds/opening.jpg",
-        "type": "break"
+        "name": "Charlie GERARD",
+        "photoUrl": "/images/speakers/charlie-gerard.png",
+        "bio": "Hey I’m Charlie, currently Software Developer @ ThoughtWorks in Sydney. I am passionate about Creative Technologies, Creative Coding, Hardware and IoT.",
+        "sessionsIds": []
     },
     {
         "id": 102,
-        "title": "Opening keynote / Keynote d'ouverture",
-        "titleMobile": "Opening keynote",
-        "image": "https://devfest2018.gdgnantes.com/images/backgrounds/keynote.jpg",
-        "description": "",
-        "type": "📣 Keynote",
-        "speakers": [
-            181
-        ]
+        "name": "Florina MUNTENESCU",
+        "photoUrl": "/images/speakers/florina-muntenescu.jpg",
+        "bio": "Florina works at Google as an Android Developer Advocate. She has been writing code for more than 8 years, mostly for Android.",
+        "sessionsIds": []
     },
     {
         "id": 103,
-        "title": "Lunch / Déjeuner",
-        "titleMobile": "Lunch",
-        "description": "Foooooood !!!",
-        "image": "https://devfest2018.gdgnantes.com/images/backgrounds/lunch.jpg",
-        "type": "break"
+        "name": "Svetlana ISAKOVA",
+        "photoUrl": "/images/speakers/svetlana-isakova.png",
+        "bio": "Alex Qin is a Brooklyn based programmer, educator, and public speaker.",
+        "sessionsIds": []
     },
 ];
 

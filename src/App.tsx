@@ -37,7 +37,7 @@ const App: React.FC = () => (
         <Route path="/sessions" component={Sessions} exact={true} />
         <Route path="/session/:id" component={SessionDetail} exact={true} />
         <Route path="/speakers" component={Speakers} exact={true} />
-        <Route path="/speakers/:id" component={SpeakerDetails} exact={true} />
+        <Route path="/speaker/:id" component={SpeakerDetails} exact={true} />
         <Route exact path="/" render={() => <Redirect to="/home" />} />
         <Route render={() => <Redirect to="/home" />} />
       </IonRouterOutlet>

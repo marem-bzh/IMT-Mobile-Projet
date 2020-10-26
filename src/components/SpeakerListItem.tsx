@@ -11,9 +11,9 @@ interface SpeakerListItemProps {
 
 const SpeakerListItem: React.FC<SpeakerListItemProps> = ({ speaker }) => {
   return (
-    <IonItem routerLink={`/session/${speaker.id}`} detail={false}>
+    <IonItem routerLink={`/speaker/${speaker.id}`} detail={false}>
       <IonLabel className="ion-text-wrap">
-        <h2>{speaker.title}</h2>
+        <h2>{speaker.name}</h2>
       </IonLabel>
     </IonItem>
   );
