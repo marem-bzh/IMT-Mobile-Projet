@@ -45,7 +45,6 @@ export async function getSpeakers() {
 };
 
 export async function getSpeaker(id: number) {
-    alert("finding speaker of id " + id);
     return (await getSpeakers()).find((s: Speaker) => s.id === id);
 };
 
