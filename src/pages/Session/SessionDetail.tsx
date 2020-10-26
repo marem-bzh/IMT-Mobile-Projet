@@ -3,13 +3,19 @@ import {
     IonBackButton,
     IonButton,
     IonButtons,
+    IonCol,
     IonContent,
     IonFab,
+    IonGrid,
     IonHeader,
+    IonImg,
     IonItem,
     IonList,
     IonMenuButton,
     IonPage,
+    IonRow,
+    IonSlide,
+    IonSlides,
     IonTitle,
     IonToolbar,
     useIonViewWillEnter
@@ -18,6 +24,7 @@ import { RouteComponentProps } from 'react-router';
 import { getSession, Session } from '../../data/sessions';
 import './SessionDetail.css';
 import { getNote } from '../../data/notes';
+import { usePhotoGallery } from '../../hooks/UsePhotoGalery';
 
 interface SessionDetailProps extends RouteComponentProps<{ id: string; }> { }
 
@@ -25,6 +32,7 @@ const SessionDetail: React.FC<SessionDetailProps> = ({ match }) => {
 
     const [session, setSession] = useState<Session>();
     const [note, setNote] = useState<string>();
+    const { photos } = usePhotoGallery();
 
     useIonViewWillEnter(() => {
         const s = getSession(parseInt(match.params.id, 10));
@@ -62,6 +70,28 @@ const SessionDetail: React.FC<SessionDetailProps> = ({ match }) => {
                         : <p>You don't have any note for this session yet.</p>}
                 </div>
 
+                <IonItem>
+                    <h2>Pictures</h2>
+                </IonItem>
+
+                <div className="ion-padding">
+                    {photos[match.params.id] ?
+
+
+                        <IonGrid>
+                            <IonRow>
+                                {
+                                    photos[match.params.id].map((photo, index) => (
+                                        <IonImg src={photo.webviewPath} />
+                                    ))
+                                }
+
+                            </IonRow>
+                        </IonGrid>
+                        : <p>You don't have any picture attached to this session yet</p>}
+                </div>
+
+
 
             </IonContent>
         </IonPage>
@@ -89,7 +119,7 @@ function sessionDetails(session: Session, note?: string): React.ReactNode {
         </div>
         <IonFab vertical="bottom" horizontal="start" slot="fixed">
             <IonButton expand="block" routerLink={`/notes/${session.id}`}>
-                {note ? "Edit note for this session" : "Add a note for this session."}
+                Edit note and pictures
             </IonButton>
         </IonFab>
 
